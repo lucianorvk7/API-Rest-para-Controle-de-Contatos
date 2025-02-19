@@ -1,6 +1,7 @@
 package br.com.lc.AppControleContatos.model;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -27,7 +28,7 @@ public class Pessoa {
 	private String endereco;
 	
 	@Column(nullable = true)// not null
-	private Double cep;
+	private String cep;
 	
 	@Column(nullable = true)// not null
 	private String cidade;
@@ -40,7 +41,7 @@ public class Pessoa {
 	private List<Contatos> contatos;
 	
 	public Pessoa () {}
-	public Pessoa(Long id, String nome, String endereco, Double cep, String cidade, String uf) {
+	public Pessoa(Long id, String nome, String endereco, String cep, String cidade, String uf) {
 		
 		this.id = id;
 		this.nome = nome;
@@ -84,11 +85,11 @@ public class Pessoa {
 	}
 
 	
-	public Double getCep() {
+	public String getCep() {
 		return cep;
 	}
 
-	public void setCep(Double cep) {
+	public void setCep(String cep) {
 		this.cep = cep;
 	}
 
@@ -120,6 +121,7 @@ public class Pessoa {
 		
 		return retorno;
 	}
+	
 
 	
 	

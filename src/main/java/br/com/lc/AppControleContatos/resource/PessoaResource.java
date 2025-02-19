@@ -1,5 +1,6 @@
 package br.com.lc.AppControleContatos.resource;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.lc.AppControleContatos.dto.MalaDiretaRecord;
 import br.com.lc.AppControleContatos.model.Pessoa;
+
 import br.com.lc.AppControleContatos.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
 
@@ -64,6 +67,18 @@ public class PessoaResource {
 		
 	}
 	
+	@GetMapping("/maladireta/{id}")
+	@Operation(summary = "Exibe uma pessoa com informações para mala direta")
+	public ResponseEntity<MalaDiretaRecord> getMalaDiretaPorId(@PathVariable Long id) {
+	    Optional<Pessoa> pessoa = pessoaService.findById(id);
+
+	    if (pessoa.isEmpty()) {
+	        return ResponseEntity.notFound().build();
+	    }
+
+	    return ResponseEntity.ok(new MalaDiretaRecord(pessoa.get()));
+	}
+
 	@PutMapping //PUT http://localhost:8080/api/pessoa
 	@Operation(summary = "Este Endpoint é para atualizar os dados de uma pessoa existente no sistema")
 	public ResponseEntity<Pessoa> update(@RequestBody Pessoa pessoa){
