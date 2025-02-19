@@ -1,14 +1,16 @@
 package br.com.lc.AppControleContatos.model;
 
  
+import br.com.lc.AppControleContatos.model.enums.Tipo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,8 +21,9 @@ public class Contatos {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //Autoincrement
 	public Long id;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private Integer tipo;
+	private Tipo tipo;
 	
 	
 	@Column(nullable = false)
@@ -30,12 +33,16 @@ public class Contatos {
 	@JoinColumn(name = "pessoa_id", referencedColumnName = "id", nullable = false)
 	private Pessoa pessoa;
 	
+	
+	
+	
+	
 	public Contatos() {
 		
 	}
 
 	
-	public Contatos(Long id, Integer tipo, Integer contato, Pessoa pessoa) {
+	public Contatos(Long id, Tipo tipo, Integer contato, Pessoa pessoa) {
 		
 		this.id = id;
 		this.tipo = tipo;
@@ -54,12 +61,12 @@ public class Contatos {
 	}
 
 
-	public Integer getTipo() {
+	public Tipo getTipo() {
 		return tipo;
 	}
 
 
-	public void setTipo(Integer tipo) {
+	public void setTipo(Tipo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -82,6 +89,9 @@ public class Contatos {
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
 	}
+	
+	
+	
 
 	
 	@Override
@@ -93,6 +103,9 @@ public class Contatos {
 					"pessoa:" 	+ (this.pessoa != null ? pessoa.getId() : "null")	+ "]";
 		
 		
+
+
+
 	}
 	
 	
